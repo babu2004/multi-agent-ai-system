@@ -1,0 +1,17 @@
+[project]
+name = "multi-agent-ai-system"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "babu2004", email = "132599446+babu2004@users.noreply.github.com" }
+]
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+multi-agent-ai-system = "multi_agent_ai_system:main"
+
+[build-system]
+requires = ["uv_build>=0.12.8,<0.13.0"]
+build-backend = "uv_build"
