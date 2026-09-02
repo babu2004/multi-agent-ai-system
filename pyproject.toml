@@ -7,7 +7,10 @@ authors = [
     { name = "babu2004", email = "132599446+babu2004@users.noreply.github.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "dotenv>=0.9.9",
+    "openai>=3.7.0",
+]
 
 [project.scripts]
 multi-agent-ai-system = "multi_agent_ai_system:main"
