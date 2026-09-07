@@ -19,6 +19,7 @@ def generate_with_tools(messages, tools):
         model="qwen/qwen3.6-27b",
         messages=messages,
         tools=tools,
+        max_tokens=300
     )
 
     return response
