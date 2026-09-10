@@ -54,22 +54,24 @@ def run_agent(query: str) -> str:
             tool_name = tool_call.function.name
             arguments = json.loads(tool_call.function.arguments)
 
-            if tool_name not in TOOL_REGISTRY:
-                result = f"unknow tool {tool_name}"
+        if tool_name not in TOOL_REGISTRY:
+            result = f"Unknown tool: {tool_name}"
+        else:
+            try:
+                tool = TOOL_REGISTRY[tool_name]
+                result = tool(**arguments)
+            except Exception as e:
+                result = f"Tool execution failed: {e}"
+                print(f"[TOOL ERROR] {result}")
 
-            else:
-                try:
-                    tool = TOOL_REGISTRY[tool_name]
-                    result = tool(**arguments)
-                except Exception as e:
-                    result = f"Tool execution failed: {e}"
+        messages.append(
+            {
+                "role": "tool",
+                "tool_call_id": tool_call.id,
+                "content": str(result),
+            }
+        )
 
-            messages.append(
-                {
-                    "role":"tool",
-                    "tool_call_id":tool_call.id,
-                    "content":str(result)
-                }
-            )
+        print(f"[TOOL RESULT] {result}")
     return "Agent stopped because the maximum number of steps was reached"
 
