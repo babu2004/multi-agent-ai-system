@@ -2,10 +2,11 @@ import json
 
 from llm.provider import generate_with_tools
 from tools.calculator import calculate
-from tools.schemas import calculator_tool
-
+from tools.time_tool import get_current_time
+from tools.schemas import calculator_tool, time_tool
 TOOL_REGISTRY = {
-    "calculate":calculate,
+    "calculate": calculate,
+    "get_current_time": get_current_time,
 }
 
 def run_agent(query: str) -> str:
@@ -20,7 +21,7 @@ def run_agent(query: str) -> str:
     for _ in range(5):
         response = generate_with_tools(
             messages=messages,
-            tools=[calculator_tool]
+            tools=[calculator_tool, time_tool],
         )
 
         message = response.choices[0].message

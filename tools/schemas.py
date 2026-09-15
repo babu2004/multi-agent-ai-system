@@ -24,3 +24,16 @@ calculator_tool = {
         }
     }
 }
+
+time_tool = {
+    "type": "function",
+    "function": {
+        "name": "get_current_time",
+        "description": "Get the current local date and time.",
+        "parameters": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+        },
+    },
+}

@@ -3,9 +3,7 @@ import os
 from openai import OpenAI
 from dotenv import load_dotenv
 
-
 load_dotenv()
-
 
 client = OpenAI(
     api_key=os.getenv("GROQ_API_KEY"),
@@ -14,12 +12,11 @@ client = OpenAI(
 
 
 def generate_with_tools(messages, tools):
-
     response = client.chat.completions.create(
-        model="qwen/qwen3.6-27b",
+        model="openai/gpt-oss-120b",
         messages=messages,
         tools=tools,
-        max_tokens=300
+        max_tokens=300,
     )
 
     return response
