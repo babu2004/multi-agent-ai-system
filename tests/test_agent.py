@@ -1,6 +1,9 @@
 from agents.agent import run_agent
 
 
-answer = run_agent("What is 125 multiplied by 37? ")
+query = "Calculate 125 multiplied by 37 and tell me the current time."
+
+answer = run_agent(query)
+
 print("\nFinal Answer:")
 print(answer)
