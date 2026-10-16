@@ -6,6 +6,7 @@ from tools.calculator import calculate
 from tools.time_tool import get_current_time
 from tools.schemas import calculator_tool, time_tool
 from agents.state import AgentState
+from agents.planner import create_plan
 
 TOOL_REGISTRY = {
     "calculate": calculate,
@@ -36,6 +37,7 @@ def execute_tool(tool_call):
         return error
 
 
+
 def run_agent(query: str) -> str:
 
     state = AgentState(
@@ -46,6 +48,15 @@ def run_agent(query: str) -> str:
         }
     ]
     )
+
+    state.plan = create_plan(query)
+    print("\n [PLAN]")
+    for task in state.plan:
+        print(
+            f"{task['id']}. "
+            f"{task['description']} "
+            f"[{task['status']}]"
+        )
 
 
 
