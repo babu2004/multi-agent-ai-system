@@ -17,7 +17,7 @@ state = AgentState(
 )
 
 state.complete_task(1, "4625")
-state.complete_task(2, "925.0")
+state.fail_task(2, "cann't calculate")
 
 print("\n[AGENT STATE]")
 print("Plan:", state.plan)

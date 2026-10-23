@@ -36,7 +36,10 @@ def execute_tool(tool_call):
 
         return error
 
-
+def record_task_result(state, task_id:int, result: str) -> None:
+    # record the result and mark it completed
+    state.complete_task(task_id,result)
+    print(f"[TASK COMPLETED] task {task_id}: {result}")
 
 def run_agent(query: str) -> str:
 
