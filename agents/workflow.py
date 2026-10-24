@@ -18,7 +18,7 @@ def run_planned_workflow(query: str) -> AgentState:
 
     print("\n[PLAN]")
     for task in state.plan:
-        print(f"{task['id']}. {task['description']} [pending]")
+        print(f"{task['id']}. {task['description']} {task['status']} ")
 
     for task in state.plan:
         task_id = task["id"]

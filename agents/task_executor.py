@@ -41,7 +41,7 @@ def execute_task(description: str,task_results:dict[int, str])-> str:
     for _ in range(5):
         response = generate_with_tools(
             messages = messages,
-            tools = AVAILABLE_TOOLS
+             tools = AVAILABLE_TOOLS
         )
         message = response.choices[0].message
 
