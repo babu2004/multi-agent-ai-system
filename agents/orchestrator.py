@@ -1,7 +1,7 @@
 
 from llm.provider import generate_with_tools
 from agents.calculator_agent import run_calculator_agent
-
+from agents.research_agent import run_research_agent
 
 def choose_agent(query: str) -> str:
     messages = [
@@ -46,3 +46,22 @@ def run_orchestrator(query: str) -> str:
         "No general-purpose specialist is implemented yet. "
         "Please try an arithmetic request."
     )
+
+def run_collaborative_workflow(query: str) -> str:
+
+    research_result = run_research_agent(str)
+
+    Population = research_result["value"]
+    print("\n[ORCHESTRATOR] Passing research result to Calculator Agent...")
+
+    calculation_query = (f"Calulate {Population} multiplied by 0.05.")
+
+    calculation_result = run_calculator_agent(calculation_query)
+
+    final_answer = (
+        f"Based on our simulated population figure of "
+        f"{Population:,} people, 5% is calculated as follows:\n"
+        f"{calculation_result}"
+    )
+
+    return final_answer

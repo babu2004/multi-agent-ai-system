@@ -5,6 +5,7 @@ from agents.orchestrator import run_orchestrator
 queries = [
     "What is 125 multiplied by 37, then divided by 5?",
     "Calculate 250 divided by 10.",
+    "calculate what 5% of that 687 would be.",
 ]
 
 for query in queries:
