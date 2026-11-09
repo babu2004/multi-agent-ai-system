@@ -49,19 +49,36 @@ def run_orchestrator(query: str) -> str:
 
 def run_collaborative_workflow(query: str) -> str:
 
-    research_result = run_research_agent(str)
+    try:
+        # Step 1: Research Agent 
+        research_result = run_research_agent(query)
 
-    Population = research_result["value"]
-    print("\n[ORCHESTRATOR] Passing research result to Calculator Agent...")
+        # Step 2: Validate the result 
+        if not isinstance(research_result, dict):
+            raise ValueError("Invalid research result.")
+        
+        population = research_result.get("value")
 
-    calculation_query = (f"Calulate {Population} multiplied by 0.05.")
+        if not isinstance(population,(int,float)) or population <= 0:
+            raise ValueError("Research Agent returned an invalid population.")
 
-    calculation_result = run_calculator_agent(calculation_query)
+        print("\n[ORCHESTRATOR] Passing research result to Calculator Agent...")
+        #step 3: Calculator Agent
+        calculation_query = (f"Calulate {Population} multiplied by 0.05.")
 
-    final_answer = (
+        calculation_result = run_calculator_agent(calculation_query)
+
+        if not calculation_result:
+            raise ValueError("Calculator agent returned an empty result.")
+    
+        return (
         f"Based on our simulated population figure of "
         f"{Population:,} people, 5% is calculated as follows:\n"
         f"{calculation_result}"
-    )
+        )
 
-    return final_answer
+    except Exception as exc:
+        print(f"\n [ORCHESTRATOR ERROR] {exc}")
+        return f"Unable to complete the workflow: {exc}"
+        
+ 
