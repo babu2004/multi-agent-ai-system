@@ -6,6 +6,7 @@ from langchain.tools import tool
 from langchain_groq import ChatGroq
 
 from tools.calculator import calculate
+from tools.time_tool import get_current_time
 
 load_dotenv()
 
@@ -18,6 +19,13 @@ def calculator(a: float, b: float, operation: str) -> float:
     Supported operations: +, -, *, /
     """
     return calculate(a, b, operation)
+@tool
+def current_time()-> str:
+    """
+    only returns the current time 
+    """
+
+    return get_current_time()
 
 
 # 2. Connect to Groq
@@ -31,7 +39,7 @@ model = ChatGroq(
 # 3. Create the agent
 agent = create_agent(
     model=model,
-    tools=[calculator],
+    tools=[calculator,current_time],
     system_prompt=(
         "You are a calculator assistant. "
         "Use the calculator tool for arithmetic. "

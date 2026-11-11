@@ -1,7 +1,7 @@
 
 from agents.langchain_calculator_agent import run_langchain_calculator
 
-query = "Calculate 125 multiplied by 37, then divide the result by 5."
+query = "get the current time and add its hours, minutes and seconds"
 
 print(f"\n[USER] {query}")
 
